@@ -1,6 +1,11 @@
+@font-face {
+    font-family: 'DOS437';
+    src: url('/fonts/Perfect_DOS_VGA_437_Win.ttf');
+}
+
 body {
-  padding: 0;
-  text-align: center;
+    padding: 0;
+    text-align: center;
 }
 /* audio {
   display: none;
@@ -26,14 +31,14 @@ width: 150px;
 */
 
 body button {
-  font-size: 30px;
-  background-color: #870007;
-  color: #fff;
-  padding: 20px 40px;
-  border: 0;
-  box-shadow: 0;
-  border-radius: 5px;
-  margin-bottom: 20px;
+    font-size: 30px;
+    background-color: #870007;
+    color: #fff;
+    padding: 20px 40px;
+    border: 0;
+    box-shadow: 0;
+    border-radius: 5px;
+    margin-bottom: 20px;
 }
 /* 
   #game-board {
@@ -44,5 +49,5 @@ body button {
   /* styles/style.css */
 
 canvas {
-  border: 1px solid red;
+    border: 1px solid red;
 }
