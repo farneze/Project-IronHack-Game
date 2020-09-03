@@ -745,11 +745,11 @@ window.onload = () => {
     }
     // DEBUG ONLY
     if (e.keyCode == 37) {
-      gameScript.stop();
-      // <----
+      // gameScript.stop();
+      // <---- Arrow
     }
     // if (e.keyCode == 39) {
-    //   // ---->
+    //    Arrow ---->
     // }
   };
 
@@ -781,7 +781,7 @@ window.onload = () => {
     this.mute = false;
     this.bgm.loop = true;
     this.bgm.style.display = "none";
-    this.bgm.volume = 0.2;
+    this.bgm.volume = 0.05;
     this.playBGM = () => {
       this.bgm.play();
     };
