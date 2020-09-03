@@ -1,92 +1,86 @@
 // TODO:
-// Bug click twice to start
-// Hitbox detection
+// Bug click twice to start (Onload event)
+// Game over screen
 //
-//
-// Easter Eggs
-// Plz, Gloria Gaynor
 window.onload = () => {
+    var soundBoard = new SoundBoard()
+    var musicType = document.getElementById('music-button')
+    soundBoard.mood = musicType.innerHTML
+
+    document.getElementById('music-button').onclick = () => {
+        if (musicType.innerHTML == 'BGM') {
+            musicType.innerHTML = 'Funny'
+            soundBoard.mood = 'Funny'
+            soundBoard.bgm.src = '/audio/Rock Around the Clock-Bill Haley.m4a'
+        } else if (musicType.innerHTML == 'Sad') {
+            musicType.innerHTML = 'BGM'
+            soundBoard.mood = 'BGM'
+            soundBoard.bgm.src = '/audio/Start_Kornephoros.mp3'
+        } else {
+            musicType.innerHTML = 'Sad'
+            soundBoard.mood = 'Sad'
+            soundBoard.bgm.src = '/audio/David Bowie – Space Oddity.ogg'
+        }
+        soundBoard.playBGM()
+    }
+
     document.getElementById('start-button').onclick = () => {
-        // document.getElementById("game-board").style.display = "block";
-        changeMusic(2)
+        soundBoard.stopBGM()
+        if (soundBoard.mood == 'Funny') {
+            soundBoard.bgm.src = '/audio/I Will Survive - Gloria Gaynor.mp3'
+        }
+        if (soundBoard.mood == 'BGM') {
+            soundBoard.bgm.src = '/audio/Game_Space-Debris.mp3'
+        }
+        if (soundBoard.mood == 'Sad') {
+            soundBoard.bgm.src = '/audio/Kansas - Dust in the wind.mp3'
+        }
+        soundBoard.src
+        document.getElementById('menu').style.display = 'none'
+        document.getElementById('game-board').style.display = 'flex'
+        soundBoard.playBGM()
         gameSetup()
     }
-    //
 
     function gameSetup() {
         //startGame
         // player.y = (floor.height - this.height) / 2 + background.height
         // player.x = (gameScript.canvas.width - this.width) * 0.8);
+
         player = new Player(0, 230, 0.4, 0.4, '/images/rover.png')
-        //rover_tiresmoke.png
-        tireSmoke = new Smoke(
-            400,
-            200,
-            0.2,
-            0.2,
-            '/images/rovertiresmoke1.png',
-            0
-        )
+        tireSmoke1 = new Smoke(400, 200, 0.2, 0.2, '/images/roversmoke1.png', 0)
+        tireSmoke2 = new Smoke(400, 200, 0.2, 0.2, '/images/roversmoke2.png', 0)
+        tireSmoke3 = new Smoke(400, 200, 0.2, 0.2, '/images/roversmoke3.png', 0)
         sky = new Background(0, 0, 0.5, 0.4, '/images/sky.png', 0)
-        clouds = new Background(
-            0,
-            100,
-            0.1,
-            0.1,
-            '/images/cloudsbn.png',
-            3 * gameScript.gameSpeed
-        )
+        clouds = new Background(0, 100, 0.1, 0.1, '/images/cloudsbn.png', 3)
         mountainFront = new Background(
             0,
             0,
             1,
             1,
             '/images/bckgndFront.png',
-            1.5 * gameScript.gameSpeed
+            1.5
         )
-        mountainMid = new Background(
-            0,
-            0,
-            1,
-            1,
-            '/images/bckgndMid.png',
-            0.75 * gameScript.gameSpeed
-        )
-        mountainBack = new Background(
-            0,
-            0,
-            1,
-            1,
-            '/images/bckgndBack.png',
-            0.3 * gameScript.gameSpeed
-        )
-        floor = new Background(
-            0,
-            114,
-            0.25,
-            0.25,
-            '/images/terrain.png',
-            5 * gameScript.gameSpeed
-        )
-        // orangeZone1 = new Storm(51, 120 - 30, 0.5, 0.5, '/images/smlcloud.png')
-        // orangeZone2 = new Storm(38, 170 - 30, 0.5, 0.5, '/images/smlcloud.png')
-        // orangeZone3 = new Storm(30, 230 - 30, 0.5, 0.5, '/images/smlcloud.png')
-        // orangeZone4 = new Storm(38, 290 - 30, 0.5, 0.5, '/images/smlcloud.png')
-        // orangeZone5 = new Storm(51, 350 - 30, 0.5, 0.5, '/images/smlcloud.png')
-        orangeZone1 = new Storm(50, 75, 0.5, 0.5, '/images/smlcloud.png')
-        orangeZone2 = new Storm(50, 122, 0.5, 0.5, '/images/smlcloud.png')
-        orangeZone3 = new Storm(50, 169, 0.5, 0.5, '/images/smlcloud.png')
-        orangeZone4 = new Storm(50, 216, 0.5, 0.5, '/images/smlcloud.png')
-        orangeZone5 = new Storm(50, 263, 0.5, 0.5, '/images/smlcloud.png')
-        orangeZone6 = new Storm(50, 310, 0.5, 0.5, '/images/smlcloud.png')
+        mountainMid = new Background(0, 0, 1, 1, '/images/bckgndMid.png', 0.75)
+        mountainBack = new Background(0, 0, 1, 1, '/images/bckgndBack.png', 0.3)
+        floor = new Background(0, 114, 0.25, 0.25, '/images/terrain.png', 5)
+        orangeZone1 = new Storm(40, 75, 0.5, 0.5, '/images/smlcloud.png')
+        orangeZone2 = new Storm(40, 122, 0.5, 0.5, '/images/smlcloud.png')
+        orangeZone3 = new Storm(40, 169, 0.5, 0.5, '/images/smlcloud.png')
+        orangeZone4 = new Storm(40, 216, 0.5, 0.5, '/images/smlcloud.png')
+        orangeZone5 = new Storm(40, 263, 0.5, 0.5, '/images/smlcloud.png')
+        orangeZone6 = new Storm(40, 310, 0.5, 0.5, '/images/smlcloud.png')
+        orangeZone7 = new Storm(100, 75, 0.5, 0.5, '/images/smlcloud.png')
+        orangeZone8 = new Storm(100, 122, 0.5, 0.5, '/images/smlcloud.png')
+        orangeZone9 = new Storm(100, 169, 0.5, 0.5, '/images/smlcloud.png')
+        orangeZone10 = new Storm(100, 216, 0.5, 0.5, '/images/smlcloud.png')
+        orangeZone11 = new Storm(100, 263, 0.5, 0.5, '/images/smlcloud.png')
+        orangeZone12 = new Storm(100, 310, 0.5, 0.5, '/images/smlcloud.png')
         redZone1 = new Storm(-125, 0, 0.5, 0.5, '/images/bigcloud1.png')
         redZone2 = new Storm(-125, 51.4, 0.5, 0.5, '/images/bigcloud2.png')
         redZone3 = new Storm(-125, 102.8, 0.5, 0.5, '/images/bigcloud1.png')
         redZone4 = new Storm(-125, 153.6, 0.5, 0.5, '/images/bigcloud2.png')
         redZone5 = new Storm(-125, 204.2, 0.5, 0.5, '/images/bigcloud1.png')
-        // boulder1 = new Component(500, 170, 0.1, 0.1, '/images/boulder1.png', 5)
-        // boulder2 = new Component(500, 280, 0.1, 0.1, '/images/boulder2.png', 5)
-        // boulder3 = new Component(400, 230, 0.1, 0.1, '/images/boulder3.png', 5)
         gameScript.start()
         gameScript.yComponentsPos = []
         gameScript.obstaclesArray = []
@@ -95,14 +89,8 @@ window.onload = () => {
     function gameLoop() {
         gameScript.clear()
         gameScript.frames += 1
-        gameScript.testVar += 1
-        if (gameScript.testVar / 60 > 2) {
-            gameScript.battery.pop()
-            gameScript.testVar = 0
-        }
-        // if (((gameScript.frames % 180) * gameScript.gameSpeed) / 3 === 0) {
-        //     createObstacle()
-        // }
+        let frames = gameScript.frames
+
         sky.draw()
         mountainBack.scroll()
         mountainMid.scroll()
@@ -116,14 +104,29 @@ window.onload = () => {
             obj.move()
             gameScript.yComponentsPos.push(obj)
         })
+        if (frames % 15 >= 0 && frames % 15 < 5) {
+            gameScript.yComponentsPos.push(tireSmoke1)
+            tireSmoke1.moveSmoke()
+        } else if (frames % 15 >= 5 && frames % 15 < 10) {
+            gameScript.yComponentsPos.push(tireSmoke3)
+            tireSmoke3.moveSmoke()
+        } else {
+            gameScript.yComponentsPos.push(tireSmoke2)
+            tireSmoke2.moveSmoke()
+        }
         gameScript.yComponentsPos.push(player)
-        gameScript.yComponentsPos.push(tireSmoke)
         gameScript.yComponentsPos.push(orangeZone1)
         gameScript.yComponentsPos.push(orangeZone2)
         gameScript.yComponentsPos.push(orangeZone3)
         gameScript.yComponentsPos.push(orangeZone4)
         gameScript.yComponentsPos.push(orangeZone5)
         gameScript.yComponentsPos.push(orangeZone6)
+        gameScript.yComponentsPos.push(orangeZone7)
+        gameScript.yComponentsPos.push(orangeZone8)
+        gameScript.yComponentsPos.push(orangeZone9)
+        gameScript.yComponentsPos.push(orangeZone10)
+        gameScript.yComponentsPos.push(orangeZone11)
+        gameScript.yComponentsPos.push(orangeZone12)
         gameScript.yComponentsPos.push(redZone1)
         gameScript.yComponentsPos.push(redZone2)
         gameScript.yComponentsPos.push(redZone3)
@@ -134,13 +137,19 @@ window.onload = () => {
         )
         gameScript.yComponentsPos.forEach((obj) => obj.draw())
         player.move()
-        tireSmoke.moveSmoke()
+
         orangeZone1.move()
         orangeZone2.move()
         orangeZone3.move()
         orangeZone4.move()
         orangeZone5.move()
         orangeZone6.move()
+        orangeZone7.move()
+        orangeZone8.move()
+        orangeZone9.move()
+        orangeZone10.move()
+        orangeZone11.move()
+        orangeZone12.move()
         redZone1.move()
         redZone2.move()
         redZone3.move()
@@ -148,6 +157,36 @@ window.onload = () => {
         redZone5.move()
         gameScript.score()
         gameScript.reqAnimation = window.requestAnimationFrame(gameLoop)
+        if (player.reachStart == true) {
+            // Obstacle creation mechanic
+            if (frames % Math.floor(30 / gameScript.gameSpeed) == 0) {
+                createObstacle()
+            }
+            // Game difficulty mechanic
+            if (frames % 600 === 0 && gameScript.gameSpeed < 3.25) {
+                gameScript.gameSpeed += 0.25
+            }
+
+            // Battery charge/discharge mechanics
+            if (frames % 30 == 0) {
+                if (player.x < 350) {
+                    gameScript.batteryStatus = 'Discharging!'
+                    gameScript.battery.pop()
+                } else if (gameScript.battery.length < 10) {
+                    if (frames % 90 == 0) {
+                        gameScript.batteryStatus = 'Charging...'
+                        gameScript.battery.push('|')
+                    }
+                } else {
+                    gameScript.batteryStatus = 'FULL'
+                }
+            }
+
+            // Gameover mechanic
+            if (player.x < 100 || gameScript.battery[0] == undefined) {
+                gameScript.stop()
+            }
+        }
         gameScript.yComponentsPos = []
     }
     const gameScript = {
@@ -155,12 +194,14 @@ window.onload = () => {
         canvas: document.createElement('canvas'),
         obstaclesArray: [],
         yComponentsPos: [],
-        testVar: 0,
         frames: 0,
         seconds: 0,
         minutes: 0,
         gameSpeed: 1,
+        oldGameSpeed: 1,
+        counter: 0,
         battery: [],
+        batteryStatus: '',
         fontX: 30,
         fontY: 30,
         drawCanvas: function () {
@@ -169,6 +210,10 @@ window.onload = () => {
             this.context = this.canvas.getContext('2d')
             document.getElementById('game-board').append(this.canvas)
         },
+        // TODO
+        // -------------------
+        // this.img.onload = function () {
+        //----------------
         start: function () {
             this.drawCanvas()
             let arr = [...new Array(10)].forEach((el) => this.battery.push('|'))
@@ -181,12 +226,7 @@ window.onload = () => {
             const ctx = this.context
             seconds = Math.floor((this.frames / 60) % 60)
             minutes = Math.floor(this.frames / 3600)
-            var gradient = ctx.createLinearGradient(
-                this.fontX + 150,
-                0,
-                this.fontX + 200,
-                0
-            )
+
             ctx.font = '24px DOS437'
             // ctx.fillStyle = '#0f6'
             ctx.fillStyle = '#00FF00'
@@ -202,43 +242,120 @@ window.onload = () => {
                 )
             } else {
                 ctx.fillText(
-                    'Alive for 14 years, 46 days and ' + seconds + ' seconds',
+                    'Alive:    14 years, 46 days and ' + seconds + ' seconds',
                     this.fontX,
                     this.fontY
                 )
             }
             ctx.fillText('Battery: ', this.fontX, this.fontY + 30)
+
+            // Text for battery bars and its gradient
+            var gradient = ctx.createLinearGradient(
+                this.fontX + 150,
+                0,
+                this.fontX + 200,
+                0
+            )
             gradient.addColorStop('0', 'red')
-            gradient.addColorStop('0.15', 'yellow')
+            gradient.addColorStop('0.05', 'yellow')
             gradient.addColorStop('0.95', 'yellow')
             gradient.addColorStop('1.0', '#00FF00')
             ctx.fillStyle = gradient
             ctx.fillText(
                 this.battery.join(''),
-                this.fontX + 110,
+                this.fontX + 130,
                 this.fontY + 30
             )
+            ctx.fillStyle = '#00FF00'
+            ctx.fillText('Status: ', this.fontX, this.fontY + 60)
+            ctx.fillText(
+                gameScript.batteryStatus,
+                this.fontX + 130,
+                this.fontY + 60
+            )
+
+            // Shows actual speed
+            ctx.fillText('Status: ', this.fontX, this.fontY + 60)
+            ctx.fillText(
+                'Game speed: ' + (this.gameSpeed * 4 - 3),
+                this.fontX + 290,
+                this.fontY + 350
+            )
+            // Shows alert bigger storm alert
+            if (this.gameSpeed != this.oldGameSpeed) {
+                if (
+                    this.frames % 60 < 15 ||
+                    (this.frames % 60 >= 30 && this.frames % 60 < 60)
+                ) {
+                    ctx.fillStyle = '#FF0000'
+                    ctx.fillText('Alert:', 260, 200)
+                    ctx.fillStyle = '#00FF00'
+                    ctx.fillText('Storm thickens!!', 350, 200)
+                    this.counter += 1
+                    if (this.counter > 130) {
+                        this.oldGameSpeed = this.gameSpeed
+                        this.counter = 0
+                    }
+                }
+            }
         },
         stop: function () {
-            clearInterval(this.interval)
-            cancelAnimationFrame(this.reqAnimation)
-            this.gameOver()
+            window.cancelAnimationFrame(gameScript.reqAnimation)
+            soundBoard.stopBGM()
+            // this.timeId = setTimeout(this.gameOver, 2000)
+            // this.reqAnimation = window.requestAnimationFrame(this.gameOver())
 
-            gameScript.clear()
-            this.ctx.fillRect(0, 0, this.width, this.height)
-            this.ctx.fillText(`GAME OVER`, this.width / 2, this.height / 2)
+            if (soundBoard.mood == 'Funny') {
+                soundBoard.bgm.src = '/audio/Portal - Still Alive - Ending.mp3'
+            }
+            if (soundBoard.mood == 'BGM') {
+                soundBoard.bgm.src = '/audio/Game_Space-Debris.mp3'
+            }
+            if (soundBoard.mood == 'Sad') {
+                soundBoard.bgm.src = '/audio/Kansas - Dust in the wind.mp3'
+            }
+            soundBoard.playBGM()
+            this.alpha = 0
+            this.reqAnimation = window.requestAnimationFrame(this.gameOver)
         },
         gameOver: function () {
-            this.clear()
-            this.drawFinalPoints()
-            this.restartGame()
+            const ctx = this.context
+            gameScript.clear()
+            this.frames += 1
+            // let this.frames = gameScript.this.frames
+
+            // if (this.frames % 60 == 0) {
+            //     alpha += 0.2
+            // }
+
+            ctx.fillStyle = 'rgba(0, 255, 0, 1)'
+            // ctx.fillStyle = '#00FF00'
+            ctx.fillRect(0, 0, width, height)
+            ctx.fillText(`It was a long road...`, width / 2, height / 2)
+            ctx.fillText(`but Oppy's gone...`, width / 2, height / 2 + 30)
+            gameScript.context.fillText(
+                `... or is it?`,
+                width / 2,
+                height / 2 + 60
+            )
+
+            // if (frames != frames) {
+            //     window.cancelAnimationFrame(gameScript.reqAnimation)
+            //     this.restartGame()
+            // }
         },
-        drawFinalPoints: function () {},
-        restartGame: function () {},
+        // drawFinalPoints: function () {},
+        restartGame: function () {
+            soundBoard.stopBGM()
+            window.cancelAnimationFrame(gameScript.reqAnimation)
+            document.getElementById('menu').style.display = 'flex'
+            document.getElementById('game-board').style.display = 'none'
+        },
     }
+
     function createObstacle() {
         x = gameScript.canvas.width
-        y = player.y // rndGen(114, gameScript.canvas.height - 42)
+        y = rndGen(114, gameScript.canvas.height - 42) // player.y //
         if (rndGen(1, 4, 'f') == 1) {
             gameScript.obstaclesArray.push(
                 new Obstacle(
@@ -284,10 +401,14 @@ window.onload = () => {
         this.directionY = rndGen(-1)
         this.targetX = x + 25 * this.directionX
         this.targetY = y + 10 * this.directionY
-        this.speed = speed
+        this.speed = speed * gameScript.gameSpeed
         this.dx = 0
         this.width = this.img.width * scaleW
         this.height = this.img.height * scaleH
+        // this.img.onload = function () {
+        //     this.draw()
+        //     this.scroll()
+        // }
         this.draw = function () {
             const ctx = gameScript.context
             ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
@@ -297,7 +418,8 @@ window.onload = () => {
             if (this.dx <= -this.width) {
                 this.dx = 0
             }
-            this.dx -= this.speed
+            this.dx -= this.speed * gameScript.gameSpeed
+            ctx.drawImage(this.img, this.dx, this.y, this.width, this.height)
             ctx.drawImage(
                 this.img,
                 this.width + this.dx,
@@ -305,7 +427,6 @@ window.onload = () => {
                 this.width,
                 this.height
             )
-            ctx.drawImage(this.img, this.dx, this.y, this.width, this.height)
         }
         this.bottom = function () {
             return this.y + this.height
@@ -324,18 +445,16 @@ window.onload = () => {
         this.targetY = y
         this.width = this.img.width * scaleW
         this.height = this.img.height * scaleH
+
         this.draw = function () {
             const ctx = gameScript.context
             ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
         }
         this.move = function () {
-            // const stepSpeed = 1.75;
-            // const checkRate = 0.2;
-            // this.targetX = gameScript.canvas.width - this.width - 100
-            this.targetX = gameScript.canvas.width - this.width - 300
+            this.targetX = gameScript.canvas.width - this.width - 100
 
-            // Checks if player is near targe
-            if (this.reachStart == false && this.x == gameScript.canvas.width) {
+            // Checks if player is near target
+            if (this.reachStart == false && this.x == this.targetX) {
                 this.reachStart = true
             }
             if (this.reachStart == false) {
@@ -343,11 +462,7 @@ window.onload = () => {
             } else {
                 this.stepX = 0.02
             }
-            // if (this.x > this.targetX - 25) {
             this.x += (this.targetX - this.x) * this.stepX
-            // } else {
-            //   this.x += 2.5;
-            // }
             this.y += (this.targetY - this.y) * this.stepY
             this.collision()
             this.checkBoundaries()
@@ -355,23 +470,22 @@ window.onload = () => {
         }
         this.collision = function () {
             gameScript.obstaclesArray.forEach((el) => {
-                console.clear()
-                // con(player.right)
-                // con(el.left)
-                con(player.right > el.left)
-                con(player.top < el.bottom)
-                con(player.bottom > el.top)
-                con(
-                    player.right > el.left &&
-                        (player.top < el.bottom + 5 ||
-                            player.bottom > el.top - 5)
-                )
                 if (
-                    player.right > el.left &&
-                    (player.top < el.bottom + 5 || player.bottom > el.top - 5)
+                    player.right() > el.left() - 15 &&
+                    player.left() < el.right() &&
+                    player.top() < el.bottom() &&
+                    player.bottom() > el.top()
                 ) {
-                    con('BOOOM')
-                    //
+                    // if (player.right() > el.x + 50) {
+                    // } else {
+                    player.x = el.x - 50
+                    // }
+                    // if (player.top() > el.bottom()) {
+                    //     player.y = el.y + 1
+                    // }
+                    // if (player.bottom() < el.top()) {
+                    //     player.y = el.y - 1
+                    // }
                 }
             })
         }
@@ -403,7 +517,7 @@ window.onload = () => {
             return this.x + this.width
         }
         this.top = function () {
-            return this.y
+            return this.y + 24
         }
         this.bottom = function () {
             return this.y + this.height
@@ -445,6 +559,7 @@ window.onload = () => {
         this.dx = 0
         this.width = this.img.width * scaleW
         this.height = this.img.height * scaleH
+
         this.move = function () {
             this.x -= this.speed
 
@@ -467,7 +582,7 @@ window.onload = () => {
             return this.x + this.width
         }
         this.top = function () {
-            return this.y
+            return this.y + this.height / 5
         }
         this.bottom = function () {
             return this.y + this.height
@@ -497,7 +612,7 @@ window.onload = () => {
             Math.abs(this.targetY - this.y) < 1 ? (this.y = this.targetY) : {}
             if (this.y == this.targetY) {
                 this.directionY *= -1
-                this.targetY += 5 * this.directionY
+                this.targetY += 20 * this.directionY
             }
             this.y += this.speed * this.directionY * gameScript.gameSpeed
             // this.y += (this.targetY - this.y) * 0.025;
@@ -517,22 +632,42 @@ window.onload = () => {
     //
     document.onkeydown = function (e) {
         const step = 50
-
         if (e.keyCode == 38) {
             player.targetY = player.y - step
         }
-
+        if (e.keyCode == 87) {
+            player.targetY = player.y - step
+        }
         if (e.keyCode == 40) {
             player.targetY = player.y + step
         }
+        if (e.keyCode == 83) {
+            player.targetY = player.y + step
+        }
+        if (e.keyCode == 82) {
+            soundBoard.stopBGM()
+            window.cancelAnimationFrame(gameScript.reqAnimation)
+            document.getElementById('menu').style.display = 'flex'
+            document.getElementById('game-board').style.display = 'none'
+        }
+        if (e.keyCode == 77) {
+            if (soundBoard.mute == false) {
+                soundBoard.mute = true
+                soundBoard.stopBGM()
+            } else {
+                soundBoard.mute = false
+                soundBoard.playBGM()
+            }
+        }
+
         // DEBUG ONLY
         if (e.keyCode == 37) {
             // player.x -= 100
-            createObstacle()
+            gameScript.stop()
             // player.targetX = player.x - 100;
         }
         if (e.keyCode == 39) {
-            con(gameScript.obstaclesArray)
+            window.cancelAnimationFrame(gameScript.reqAnimation)
             // player.targetX = player.x + step;
         }
     }
@@ -554,31 +689,40 @@ window.onload = () => {
         }
     }
 
-    function changeMusic(number) {
-        switch (number) {
-            case 1:
-                document.getElementById('audio').src =
-                    '/audio/David Bowie – Space Oddity.ogg'
-                break
-            case 2:
-                document.getElementById('audio').src =
-                    '/audio/Rock Around the Clock-Bill Haley.m4a'
-                break
-            case 3:
-                document.getElementById('audio').src =
-                    '/audio/I Will Survive - Gloria Gaynor.mp3'
-                break
+    function SoundBoard() {
+        this.bgm = document.createElement('audio')
+        this.bgm.src = ''
+        this.bgm.setAttribute('preload', 'auto')
+        this.bgm.setAttribute('controls', 'none')
+        this.mood = ''
+        this.mute = false
+        this.bgm.loop = true
+        this.bgm.style.display = 'none'
+        this.bgm.volume = 0.2
+        this.playBGM = () => {
+            this.bgm.play()
+        }
+        this.stopBGM = () => {
+            this.bgm.pause()
         }
     }
 }
 
-// horizon smoke, small storm, rover smoke
-// credit: http://www.chonkypixel.com/
-// boulders
-// credit: twitter: @Anokolisa
-// big storm (altered from)
-// credit: twitter: @16pxl
-// Font: https://www.dafont.com/perfect-dos-vga-437.font
-// Help:
+// Horizon smoke, small storm, rover smoke
+// http://www.chonkypixel.com/
+// Boulders:
+// twitter: @Anokolisa
+// big storm:
+// twitter: @16pxl
+// Font:
+// https://www.dafont.com/perfect-dos-vga-437.font
+// Audio:
+// - https://www.dl-sounds.com/royalty-free/kornephoros/
+// - https://www.dl-sounds.com/royalty-free/space-debris/
+// - https://www.dl-sounds.com/royalty-free/magellanic-clouds/
 //
+// Help:
+// Pedro Resch - Teacher
+// Julia Foresti - Teacher Assistant
 // Stack overflow
+// Google
