@@ -48,15 +48,19 @@ This is its final moments before the storm...
   }
   ```
 
-  :::Warning
-  Whenever an error appears for a command inside `js con()`, the console will reference is to the function, not to the line it was called
-  :::
+!! Warning !!
+
+```
+  Whenever an error appears for a command inside **con()**,
+  the console will reference is to the function, not to the
+  line it was called.
+```
 
 ## ![Debuggerman](./images/debugger_man.png)
 
 ## The Game
 
-![HUD](./images/hud.png)
+![HUD](./images/game_screen.png)
 
 #### The Mechanics
 
@@ -81,14 +85,5 @@ This is its final moments before the storm...
   - Shows how much is impossible to reach "Game speed: 10"
 
 ---
-
-## To come
-
-- GitHub pages hosted so you can play anywhere! (as long as internet is available)
-- If you like the game, let me know, maybe I'll try to improve something.
-
----
-
-## Ending
 
 Radio signals are fading...

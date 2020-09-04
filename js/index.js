@@ -731,9 +731,7 @@ window.onload = () => {
     if (e.keyCode == 83) {
       player.targetY = player.y + step;
     }
-    if (e.keyCode == 82) {
-      gameScript.restartGame();
-    }
+
     if (e.keyCode == 77) {
       if (!soundBoard.mute) {
         soundBoard.mute = true;
@@ -744,6 +742,9 @@ window.onload = () => {
       }
     }
     // DEBUG ONLY
+    // if (e.keyCode == 82) {
+    // gameScript.restartGame();
+    // }
     // if (e.keyCode == 37) {
     // gameScript.stop();
     // <---- Arrow
