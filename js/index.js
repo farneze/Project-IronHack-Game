@@ -744,10 +744,10 @@ window.onload = () => {
       }
     }
     // DEBUG ONLY
-    if (e.keyCode == 37) {
-      // gameScript.stop();
-      // <---- Arrow
-    }
+    // if (e.keyCode == 37) {
+    // gameScript.stop();
+    // <---- Arrow
+    // }
     // if (e.keyCode == 39) {
     //    Arrow ---->
     // }
